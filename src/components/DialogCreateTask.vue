@@ -1,0 +1,73 @@
+<template>
+  <v-dialog v-model="display" persistent max-width="600px">
+    <v-card>
+      <v-card-title>
+        <span class="text-h5">Nueva cosa que hacer</span>
+      </v-card-title>
+      <v-card-text>
+        <v-container>
+          <v-row>
+            <v-col cols="12">
+              <v-text-field
+                label="Titulo*"
+                required
+                v-model="item.title"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12">
+              <v-textarea
+                label="Descripcion"
+                v-model="item.description"
+              ></v-textarea>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color="blue darken-1" text @click="exitModal()"> Close </v-btn>
+        <v-btn color="blue darken-1" text @click="saveItem()" v-on:keyup.enter="saveItem()"> Save </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+</template>
+
+<script>
+export default {
+  data: () => ({
+    item: {
+      title: null,
+      description: null,
+    },
+  }),
+  props: ["showModal"],
+  computed: {
+    display() {
+      return this.$props.showModal;
+    },
+  },
+  methods: {
+    saveItem() {
+      if (this.item.title) {
+        console.log("Dialooog!!");
+        console.log(this.item);
+        this.$emit("saveModal", this.item);
+        this.resetItem();
+      }
+    },
+    resetItem() {
+      console.log("reset item!!");
+      this.item = {
+        title: null,
+        description: null,
+      };
+    },
+
+    exitModal() {
+      this.$emit("exitModal", true);
+      this.resetItem();
+    },
+  },
+  mounted() {},
+};
+</script>
