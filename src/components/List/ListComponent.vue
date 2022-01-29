@@ -18,7 +18,7 @@
   </v-card> 
 
   <modalCreateItem :showModal="show.createModal" @exitModal="show.createModal = false"></modalCreateItem>
-  <modalDeleteItem :showModal="itemToDeleteIndex!= null" :index="itemToDeleteIndex" @exitModal="itemToDeleteIndex = null" @deleteItem="deleteItem()"></modalDeleteItem>
+  <modalDeleteItem :showModal="itemToDeleteIndex!= null" :index="itemToDeleteIndex" @exitModal="exitModal()" @deleteItem="deleteItem()"></modalDeleteItem>
 </div>
 </template>
 
@@ -52,6 +52,11 @@ export default {
   methods: {
     deleteItem(data){
       this.itemToDeleteIndex = data.index;
+    },
+    exitModal(){
+      console.log('exitModal');
+      this.itemToDeleteIndex = null
+      this.show.deleteModal = false;
     }
   },
   computed: {

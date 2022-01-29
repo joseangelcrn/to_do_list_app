@@ -68,8 +68,7 @@ export default {
     saveItem() {
       if (this.item.title) {
         this.$store.commit("task/add", this.item);
-        this.resetItem();
-        this.resetAlert();
+        this.exitModal();
       }
       else{
         this.alert.message = 'Debes de ponerle un titulo a la tarea antes de guardarla.'
@@ -87,6 +86,7 @@ export default {
       this.alert.show = false;
     },
     exitModal() {
+      this.resetAlert();
       this.$emit("exitModal", true);
       this.resetItem();
     },
