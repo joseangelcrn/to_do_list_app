@@ -18,7 +18,7 @@
   </v-card> 
 
   <modalCreateItem :showModal="showCreateModal" @exitModal="showCreateModal = false"></modalCreateItem>
-  <modalDeleteItem :showModal="showDeleteModal" @exitModal="showDeleteModal = false" @deleteItem="deleteItem()"></modalDeleteItem>
+  <modalDeleteItem :showModal="itemToDeleteIndex!= null" :index="itemToDeleteIndex" @exitModal="itemToDeleteIndex = null" @deleteItem="deleteItem()"></modalDeleteItem>
 </div>
 </template>
 
@@ -32,6 +32,7 @@ export default {
   data() {
     return {
       selectedItems: [],
+      itemToDeleteIndex:null,
       showList:false,
       showCreateModal:false,
       showDeleteModal:false
@@ -48,10 +49,9 @@ export default {
   },
   methods: {
     deleteItem(data){
-      // console.log('Borrar item',data);
-      this.$store.commit('task/delete',data.index)
-      // this.$emit('deleteItem',data.index);
-      // this.showDeleteModal = true;
+      console.log('Delete item',data);
+      this.itemToDeleteIndex = data.index;
+      // this.$store.commit('task/delete',data.index)
     }
   },
   computed: {

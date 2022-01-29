@@ -2,7 +2,7 @@
   <v-dialog v-model="display" persistent max-width="600px">
     <v-card>
       <v-card-title>
-        <span class="text-h5">¿Estas seguro que quieres eliminar la tarea {{item.title}}?</span>
+        <span class="text-h5">¿Estas seguro que quieres eliminar la tarea?</span>
       </v-card-title>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -17,38 +17,21 @@
 <script>
 export default {
   data: () => ({
-    item: {
-      title: null,
-      description: null,
-    },
+   
   }),
-  props: ["showModal"],
+  props: ["showModal","index"],
   computed: {
     display() {
       return this.$props.showModal;
     },
   },
   methods: {
-    deleteItem(data) {
-        console.log("dialog delete !!");
-        console.log(data);
-      if (this.item.title) {
-        console.log(this.item);
-        this.$emit("deleteItem", this.item);
-        this.resetItem();
-      }
+    deleteItem() {
+     this.$store.commit('task/delete',this.$props.index);
+     this.$emit('exitModal',true);
     },
-    resetItem() {
-      console.log("reset item!!");
-      this.item = {
-        title: null,
-        description: null,
-      };
-    },
-
     exitModal() {
       this.$emit("exitModal", true);
-      this.resetItem();
     },
   },
   mounted() {},
