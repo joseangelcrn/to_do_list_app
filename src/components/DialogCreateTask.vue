@@ -8,6 +8,13 @@
         <v-container>
           <v-row>
             <v-col cols="12">
+              <v-alert dense type="warning" v-show="this.alert.show">
+               {{this.alert.message}}
+              </v-alert>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12">
               <v-text-field
                 label="Titulo*"
                 required
@@ -26,7 +33,14 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="blue darken-1" text @click="exitModal()"> Close </v-btn>
-        <v-btn color="blue darken-1" text @click="saveItem()" v-on:keyup.enter="saveItem()"> Save </v-btn>
+        <v-btn
+          color="blue darken-1"
+          text
+          @click="saveItem()"
+          v-on:keyup.enter="saveItem()"
+        >
+          Save
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -39,6 +53,10 @@ export default {
       title: null,
       description: null,
     },
+    alert:{
+      show:false,
+      message:null
+    }
   }),
   props: ["showModal"],
   computed: {
@@ -49,8 +67,13 @@ export default {
   methods: {
     saveItem() {
       if (this.item.title) {
-        this.$store.commit('task/add',this.item);
+        this.$store.commit("task/add", this.item);
         this.resetItem();
+        this.resetAlert();
+      }
+      else{
+        this.alert.message = 'Debes de ponerle un titulo a la tarea antes de guardarla.'
+        this.alert.show = true;
       }
     },
     resetItem() {
@@ -60,7 +83,9 @@ export default {
         description: null,
       };
     },
-
+    resetAlert(){
+      this.alert.show = false;
+    },
     exitModal() {
       this.$emit("exitModal", true);
       this.resetItem();
