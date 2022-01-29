@@ -11,13 +11,13 @@
 
       <v-list-item-group v-model="selectedItems" multiple active-class="">
         <div v-for="(item,index) in items" :key="item.title+index" >
-          <item @showModal="deleteItem" :item="item" :index="index" @deleteItem="deleteItem"></item>
+          <item @deleteItem="deleteItem" :item="item" :index="index"></item>
         </div>
       </v-list-item-group>
     </v-list>
   </v-card> 
 
-  <modalCreateItem :showModal="showCreateModal" @exitModal="showCreateModal = false" @saveModal="saveItem"></modalCreateItem>
+  <modalCreateItem :showModal="showCreateModal" @exitModal="showCreateModal = false"></modalCreateItem>
   <modalDeleteItem :showModal="showDeleteModal" @exitModal="showDeleteModal = false" @deleteItem="deleteItem()"></modalDeleteItem>
 </div>
 </template>
@@ -26,12 +26,12 @@
 import DialogCreateTask from './DialogCreateTask';
 import ListItemComponent from "./ListItemComponent";
 import DialogDeleteTask from './DialogDeleteTask';
+import { mapState } from 'vuex';
 
 export default {
   data() {
     return {
       selectedItems: [],
-      items: [],
       showList:false,
       showCreateModal:false,
       showDeleteModal:false
@@ -44,28 +44,24 @@ export default {
   },
   beforeMount() {
     this.showList = true;
-    
-    for (let i = 1; i <= 3; i++) {
-      this.items.push({
-        title: `Tarea num. ${i}.`,
-        description: "Descripcion de mi tarea",
-      });
-    }
-
+    this.$store.commit('task/examples');
   },
   methods: {
-    saveItem(item){
-      console.log('savingItem');
-      console.log(item);
-      this.items.push(item);
-      this.showCreateModal = false;
-    },
     deleteItem(data){
-      console.log('borrado desde listComponent');
-      console.log('data',data);
-      this.showDeleteModal = true;
-      this.$emit('')
+      // console.log('Borrar item',data);
+      this.$store.commit('task/delete',data.index)
+      // this.$emit('deleteItem',data.index);
+      // this.showDeleteModal = true;
     }
   },
+  computed: {
+    ...mapState('task',{
+      items: state => state.items
+    })
+  },
+  mounted(){
+    console.log('mounted !!');
+    // console.log(this.items);
+  }
 };
 </script>

@@ -29,9 +29,9 @@ export default {
     },
   },
   methods: {
-    deleteItem() {
-        console.log("deleteItem() ..!!");
-        console.log(this.item.title);
+    deleteItem(data) {
+        console.log("dialog delete !!");
+        console.log(data);
       if (this.item.title) {
         console.log(this.item);
         this.$emit("deleteItem", this.item);

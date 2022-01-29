@@ -49,9 +49,7 @@ export default {
   methods: {
     saveItem() {
       if (this.item.title) {
-        console.log("Dialooog!!");
-        console.log(this.item);
-        this.$emit("saveModal", this.item);
+        this.$store.commit('task/add',this.item);
         this.resetItem();
       }
     },

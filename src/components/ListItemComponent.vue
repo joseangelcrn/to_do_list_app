@@ -30,7 +30,7 @@ export default {
   methods: {
     deleteItem(){
       let data = {item:this.$props.item,index:this.$props.index};
-      this.$emit('showModal',data);
+      this.$emit('deleteItem',data);
       console.log('Delete Item!!');
     }
   },
