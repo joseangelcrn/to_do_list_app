@@ -4,7 +4,7 @@
     <v-list flat subheader three-line>
       <v-subheader>
         Lista de Cosas
-        <v-btn fab dark color="indigo" x-large style="margin-left: 80%;" @click="showCreateModal = true">
+        <v-btn fab dark color="indigo" x-large style="margin-left: 80%;" @click="show.createModal = true">
           <v-icon dark> mdi-plus </v-icon>
         </v-btn>
       </v-subheader>
@@ -17,7 +17,7 @@
     </v-list>
   </v-card> 
 
-  <modalCreateItem :showModal="showCreateModal" @exitModal="showCreateModal = false"></modalCreateItem>
+  <modalCreateItem :showModal="show.createModal" @exitModal="show.createModal = false"></modalCreateItem>
   <modalDeleteItem :showModal="itemToDeleteIndex!= null" :index="itemToDeleteIndex" @exitModal="itemToDeleteIndex = null" @deleteItem="deleteItem()"></modalDeleteItem>
 </div>
 </template>
@@ -33,9 +33,11 @@ export default {
     return {
       selectedItems: [],
       itemToDeleteIndex:null,
-      showList:false,
-      showCreateModal:false,
-      showDeleteModal:false
+      show:{
+        list:false,
+        createModal:false,
+        deleteModal:false
+      }
     };
   },
   components: {
@@ -49,9 +51,7 @@ export default {
   },
   methods: {
     deleteItem(data){
-      console.log('Delete item',data);
       this.itemToDeleteIndex = data.index;
-      // this.$store.commit('task/delete',data.index)
     }
   },
   computed: {
@@ -59,9 +59,5 @@ export default {
       items: state => state.items
     })
   },
-  mounted(){
-    console.log('mounted !!');
-    // console.log(this.items);
-  }
 };
 </script>
