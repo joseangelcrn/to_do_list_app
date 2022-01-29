@@ -18,7 +18,7 @@
 
 <script>
 
-import ListComponent from './components/ListComponent.vue'
+import ListComponent from './components/List/ListComponent.vue'
 
 export default {
   name: 'App',

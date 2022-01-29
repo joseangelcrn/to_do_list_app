@@ -23,9 +23,9 @@
 </template>
 
 <script>
-import DialogCreateTask from './DialogCreateTask';
+import DialogCreateTask from '../Dialogs/DialogCreateTask';
+import DialogDeleteTask from '../Dialogs/DialogDeleteTask';
 import ListItemComponent from "./ListItemComponent";
-import DialogDeleteTask from './DialogDeleteTask';
 import { mapState } from 'vuex';
 
 export default {
