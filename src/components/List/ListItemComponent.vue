@@ -1,9 +1,9 @@
 <template>
   <div>
-    <v-list-item color="green" >
-      <template v-slot:default="{ active }">
+    <v-list-item color="green" @click="toggleSelected">
+      <template>
         <v-list-item-action>
-          <v-checkbox :input-value="active"></v-checkbox>
+          <v-checkbox :input-value="item.selected"></v-checkbox>
         </v-list-item-action>
 
         <v-list-item-content>
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex';
 export default {
   data() {
     return {};
@@ -32,7 +33,22 @@ export default {
       let data = {item:this.$props.item,index:this.$props.index};
       this.$emit('deleteItem',data);
       console.log('Delete Item!!');
+    },
+    toggleSelected(){
+      let isSelected = this.$props.item.selected;
+      let index = this.$props.index;
+      this.items[index].selected = !isSelected;
+
+      console.log('items',this.items);
     }
   },
+  computed:{
+    ...mapState('task',{
+      items:  state => state.items 
+    }),
+    active(){
+      return this.$props.item.selected;
+    }
+  }
 };
 </script>
