@@ -47,13 +47,12 @@
 </template>
 
 <script>
+
+import Task from "../../store/Classes/Task";
+
 export default {
   data: () => ({
-    item: {
-      title: null,
-      description: null,
-      selected:false
-    },
+    item: new Task(),
     alert:{
       show:false,
       message:null
@@ -78,11 +77,7 @@ export default {
     },
     resetItem() {
       console.log("reset item!!");
-      this.item = {
-        title: null,
-        description: null,
-        selected:false
-      };
+      this.item = new Task();
     },
     resetAlert(){
       this.alert.show = false;
