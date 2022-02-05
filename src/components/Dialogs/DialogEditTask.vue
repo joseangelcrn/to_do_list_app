@@ -32,8 +32,8 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="exitModal()"> Close </v-btn>
-        <v-btn color="blue darken-1" text @click="updateData()"> Save </v-btn>
+        <v-btn color="blue darken-1" text @click="exitModal()"> Cerrar </v-btn>
+        <v-btn color="blue darken-1" text @click="updateData()"> Actualizar </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
