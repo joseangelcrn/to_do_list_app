@@ -1,20 +1,35 @@
 <template>
   <div>
-     <v-expand-transition>
+    <v-expand-transition>
       <v-card v-show="show.list" class="mx-auto" max-width="800">
         <v-list flat subheader three-line>
           <v-subheader>
-            Lista de Cosas
-            <v-btn
-              fab
-              dark
-              color="indigo"
-              x-large
-              style="margin-left: 80%"
-              @click="show.createModal = true"
-            >
-              <v-icon dark> mdi-plus </v-icon>
-            </v-btn>
+            <v-row>
+              <v-col class="mt-7"> Lista de Cosas </v-col>
+              <v-col>
+                <v-btn
+                  fab
+                  dark
+                  color="indigo"
+                  x-large
+                  class="btn_add"
+                  @click="show.createModal = true"
+                >
+                  <v-icon dark> mdi-plus </v-icon>
+                </v-btn>
+                <v-btn
+                  fab
+                  dark
+                  color="error"
+                  class="btn_clear"
+                  title="Eliminar tareas completas"
+                  @click="removeDoneTasks()"
+                  :class="{'btn_locked':items.length == 0}"
+                >
+                  <v-icon dark> mdi-minus-thick </v-icon>
+                </v-btn>
+              </v-col>
+            </v-row>
           </v-subheader>
 
           <v-list-item-group v-model="selectedItems" multiple active-class="">
@@ -29,7 +44,7 @@
           </v-list-item-group>
         </v-list>
       </v-card>
-     </v-expand-transition>
+    </v-expand-transition>
 
     <modalCreateItem
       :showModal="show.createModal"
@@ -79,7 +94,7 @@ export default {
   beforeMount() {
     this.$store.commit("task/examples");
   },
-  mounted(){
+  mounted() {
     this.show.list = true;
   },
   methods: {
@@ -100,6 +115,9 @@ export default {
       this.show.deleteModal = false;
       this.show.editModal = false;
     },
+    removeDoneTasks() {
+      this.$store.commit("task/removeDoneTasks");
+    },
   },
   computed: {
     ...mapState("task", {
@@ -108,3 +126,22 @@ export default {
   },
 };
 </script>
+<style>
+.btn_add {
+  margin-left: 312px;
+  margin-top: -32px;
+  position: fixed;
+  z-index: 2;
+}
+.btn_clear {
+  margin-left: 266px;
+  margin-top: -18px;
+  position: fixed;
+  z-index: 1;
+}
+
+.btn_locked {
+  transform: rotate(45deg);
+  margin-left: 284px;
+}
+</style>

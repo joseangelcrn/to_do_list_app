@@ -4,7 +4,7 @@ const task = {
     namespaced:true,
     state: { 
         items:[],
-        nExamplesLoaded:3
+        nExamplesLoaded:0
     },
     mutations: {
       add(state,item) {
@@ -19,6 +19,12 @@ const task = {
 
           state.items[index] = updatedItem;
           
+      },
+      removeDoneTasks(state){
+        state.items = state.items.filter(function(item){
+            return !item.selected;
+        });
+
       },
       examples(state){
           console.log('Filling examples');

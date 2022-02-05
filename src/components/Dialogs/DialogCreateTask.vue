@@ -52,6 +52,7 @@ export default {
     item: {
       title: null,
       description: null,
+      selected:false
     },
     alert:{
       show:false,
@@ -80,6 +81,7 @@ export default {
       this.item = {
         title: null,
         description: null,
+        selected:false
       };
     },
     resetAlert(){
