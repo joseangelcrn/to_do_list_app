@@ -11,7 +11,7 @@
 
       <v-list-item-group v-model="selectedItems" multiple active-class="">
         <div v-for="(item,index) in items" :key="item.title+index" >
-          <item @deleteItem="deleteItem" :item="item" :index="index"></item>
+          <item @deleteItem="deleteItem" @editItem="editItem" :item="item" :index="index"></item>
         </div>
       </v-list-item-group>
     </v-list>
@@ -19,6 +19,7 @@
 
   <modalCreateItem :showModal="show.createModal" @exitModal="show.createModal = false"></modalCreateItem>
   <modalDeleteItem :showModal="itemToDeleteIndex!= null" :index="itemToDeleteIndex" @exitModal="exitModal()" @deleteItem="deleteItem()"></modalDeleteItem>
+  <modalEditItem :showModal="show.editModal"   @exitModal="exitModal()"></modalEditItem>
 </div>
 </template>
 
@@ -27,6 +28,7 @@ import DialogCreateTask from '../Dialogs/DialogCreateTask';
 import DialogDeleteTask from '../Dialogs/DialogDeleteTask';
 import ListItemComponent from "./ListItemComponent";
 import { mapState } from 'vuex';
+import DialogEditTask from '../Dialogs/DialogEditTask';
 
 export default {
   data() {
@@ -36,14 +38,16 @@ export default {
       show:{
         list:false,
         createModal:false,
-        deleteModal:false
+        deleteModal:false,
+        editModal:false
       }
     };
   },
   components: {
     item: ListItemComponent,
     modalCreateItem:DialogCreateTask,
-    modalDeleteItem:DialogDeleteTask
+    modalDeleteItem:DialogDeleteTask,
+    modalEditItem:DialogEditTask
   },
   beforeMount() {
     this.showList = true;
@@ -53,10 +57,14 @@ export default {
     deleteItem(data){
       this.itemToDeleteIndex = data.index;
     },
+    editItem(data){
+     this.$emit('')
+    },
     exitModal(){
-      console.log('exitModal');
+      console.log('exitModal (parent)');
       this.itemToDeleteIndex = null
       this.show.deleteModal = false;
+      this.itemToEdit = null;
     }
   },
   computed: {
