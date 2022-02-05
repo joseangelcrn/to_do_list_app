@@ -5,7 +5,7 @@
         <span class="text-h5">Editar Task</span>
       </v-card-title>
       <v-card-text>
-        <v-container v-if="data">
+        <v-container v-if ="data">
           <v-row>
             <v-col cols="12">
               <v-alert dense type="warning" v-show="this.alert.show">
@@ -33,7 +33,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="blue darken-1" text @click="exitModal()"> Close </v-btn>
-        <v-btn color="blue darken-1" text> Save </v-btn>
+        <v-btn color="blue darken-1" text @click="updateData()"> Save </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -60,19 +60,17 @@ export default {
       console.log("editModal => exitModal()");
       this.$emit("exitModal", true);
     },
+    updateData(){
+
+      console.log(this.$props.data);
+      this.$store.commit('task/edit',this.$props.data);
+      this.exitModal();
+    }
   },
   mounted() {
     console.log("props");
     console.log(this.$props);
   },
-  watch: {
-    data: function (newVal, oldVal) {
-      // watch it
-      // console.log("Prop changed: ", newVal, " | was: ", oldVal);
-      if(newVal){
-        this.dataBackup =  Object.assign({}, newVal);
-      }
-    },
-  },
+
 };
 </script>

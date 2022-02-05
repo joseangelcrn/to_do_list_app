@@ -19,7 +19,7 @@
 
   <modalCreateItem :showModal="show.createModal" @exitModal="show.createModal = false"></modalCreateItem>
   <modalDeleteItem :showModal="itemToDeleteIndex!= null" :index="itemToDeleteIndex" @exitModal="exitModal()" @deleteItem="deleteItem()"></modalDeleteItem>
-  <modalEditItem :showModal="show.editModal"   @exitModal="exitModal()"></modalEditItem>
+  <modalEditItem :showModal="show.editModal" :data.sync="dataToEdit"  @exitModal="exitModal()"></modalEditItem>
 </div>
 </template>
 
@@ -35,6 +35,7 @@ export default {
     return {
       selectedItems: [],
       itemToDeleteIndex:null,
+      dataToEdit:null,
       show:{
         list:false,
         createModal:false,
@@ -58,13 +59,19 @@ export default {
       this.itemToDeleteIndex = data.index;
     },
     editItem(data){
-     this.$emit('')
+      console.log('Abrir modal edicion');
+      console.log('Data = ',data);
+      this.show.editModal = true;
+      //necesario para que no haga databinding
+      this.dataToEdit=JSON.parse(JSON.stringify(data));
+      
     },
     exitModal(){
       console.log('exitModal (parent)');
       this.itemToDeleteIndex = null
+      this.dataToEdit = null;
       this.show.deleteModal = false;
-      this.itemToEdit = null;
+      this.show.editModal = false;
     }
   },
   computed: {

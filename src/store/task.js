@@ -13,6 +13,13 @@ const task = {
       delete(state,index){
           state.items.splice(index,1);
       },
+      edit(state,data){
+          let index = data.index;
+          let updatedItem = data.item;
+
+          state.items[index] = updatedItem;
+          
+      },
       examples(state){
           console.log('Filling examples');
         for (let i = 1; i <= state.nExamplesLoaded; i++) {
