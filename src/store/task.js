@@ -24,10 +24,8 @@ const task = {
           console.log('Filling examples');
         for (let i = 1; i <= state.nExamplesLoaded; i++) {
           let title = `Tarea num. ${i}.`;
-          let description = "Descripcion de mi tarea";
-          let selected = i%2 != 0;
-          
-          state.items.push(new Task(title,description,selected));
+          let description = "Descripcion de mi tarea";          
+          state.items.push(new Task(title,description,false));
           }
       }
     }
