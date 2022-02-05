@@ -6,7 +6,7 @@
           <v-subheader>
             <v-row>
               <v-col class="mt-7"> Lista de Cosas </v-col>
-              <v-col>
+              <v-col v-show="show.buttons">
                 <v-btn
                   fab
                   dark
@@ -82,6 +82,7 @@ export default {
         createModal: false,
         deleteModal: false,
         editModal: false,
+        buttons:false
       },
     };
   },
@@ -96,6 +97,7 @@ export default {
   },
   mounted() {
     this.show.list = true;
+    this.show.buttons = true;
   },
   methods: {
     deleteItem(data) {
@@ -135,10 +137,12 @@ export default {
   margin-top: -18px;
   position: fixed;
   z-index: 1;
+  transition: 0.8s;
 }
 
 .btn_locked {
   transform: rotate(45deg);
   margin-left: 284px;
+  transition: 0.8s;
 }
 </style>
