@@ -56,20 +56,14 @@ export default {
   },
   methods: {
     exitModal() {
-
-      console.log("editModal => exitModal()");
       this.$emit("exitModal", true);
     },
     updateData(){
-
-      console.log(this.$props.data);
       this.$store.commit('task/edit',this.$props.data);
       this.exitModal();
     }
   },
   mounted() {
-    console.log("props");
-    console.log(this.$props);
   },
 
 };

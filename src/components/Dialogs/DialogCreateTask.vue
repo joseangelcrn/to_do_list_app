@@ -76,7 +76,6 @@ export default {
       }
     },
     resetItem() {
-      console.log("reset item!!");
       this.item = new Task();
     },
     resetAlert(){

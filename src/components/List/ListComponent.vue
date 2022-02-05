@@ -102,14 +102,11 @@ export default {
       this.itemToDeleteIndex = data.index;
     },
     editItem(data) {
-      console.log("Abrir modal edicion");
-      console.log("Data = ", data);
       this.show.editModal = true;
       //necesario para que no haga databinding
       this.dataToEdit = JSON.parse(JSON.stringify(data));
     },
     exitModal() {
-      console.log("exitModal (parent)");
       this.itemToDeleteIndex = null;
       this.dataToEdit = null;
       this.show.deleteModal = false;

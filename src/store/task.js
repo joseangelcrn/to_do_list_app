@@ -27,7 +27,6 @@ const task = {
 
       },
       examples(state){
-          console.log('Filling examples');
         for (let i = 1; i <= state.nExamplesLoaded; i++) {
           let title = `Tarea num. ${i}.`;
           let description = "Descripcion de mi tarea";          

@@ -35,10 +35,8 @@ export default {
     deleteItem(){
       let data = {item:this.$props.item,index:this.$props.index};
       this.$emit('deleteItem',data);
-      console.log('Delete Item!!');
     },
     editItem(){
-      console.log('EditTitem');
       let index = this.$props.index;
       let item = this.$props.item;
       let data = {item,index};
@@ -48,8 +46,6 @@ export default {
       let isSelected = this.$props.item.selected;
       let index = this.$props.index;
       this.items[index].selected = !isSelected;
-
-      console.log('items',this.items);
     }
   },
   computed:{
