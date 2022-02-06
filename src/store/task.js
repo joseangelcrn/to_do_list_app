@@ -4,7 +4,7 @@ const task = {
     namespaced:true,
     state: { 
         items:[],
-        nExamplesLoaded:0
+        nExamplesLoaded:3
     },
     mutations: {
       add(state,item) {
@@ -24,13 +24,15 @@ const task = {
         state.items = state.items.filter(function(item){
             return !item.selected;
         });
-
+      },
+      toggleSelected(state,index){
+        state.items[index].selected = !state.items[index].selected;
       },
       examples(state){
         for (let i = 1; i <= state.nExamplesLoaded; i++) {
           let title = `Tarea num. ${i}.`;
           let description = "Descripcion de mi tarea";          
-          state.items.push(new Task(title,description,false));
+          state.items.push(new Task(title,description,true));
           }
       }
     }

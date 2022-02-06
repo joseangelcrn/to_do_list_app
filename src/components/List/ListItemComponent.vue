@@ -43,9 +43,9 @@ export default {
       this.$emit('editItem',data);
     },
     toggleSelected(){
-      let isSelected = this.$props.item.selected;
+      // let isSelected = this.$props.item.selected;
       let index = this.$props.index;
-      this.items[index].selected = !isSelected;
+      this.$store.commit('task/toggleSelected',index)
     }
   },
   computed:{
