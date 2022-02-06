@@ -8,8 +8,8 @@
         <v-container v-if ="data">
           <v-row>
             <v-col cols="12">
-              <v-alert dense type="warning" v-show="this.alert.show">
-                {{ this.alert.message }}
+              <v-alert dense type="warning" v-show="alert.show">
+                {{ alert.message }}
               </v-alert>
             </v-col>
           </v-row>
@@ -59,8 +59,17 @@ export default {
       this.$emit("exitModal", true);
     },
     updateData(){
-      this.$store.commit('task/edit',this.$props.data);
-      this.exitModal();
+       if (this.data.item.title) {
+        this.$store.commit('task/edit',this.$props.data);
+        this.exitModal();
+      }
+      else{
+        this.alert = {
+          show : true,
+          message : 'Debes de ponerle un titulo a la tarea antes de actualizarla.'
+        }
+      }
+     
     }
   },
   mounted() {
