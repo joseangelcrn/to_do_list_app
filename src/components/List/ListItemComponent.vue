@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-list-item color="green" @click="toggleSelected">
+    <v-list-item color="green"  @click="toggleSelected">
       <template>
         <v-list-item-action>
           <v-checkbox :input-value="item.selected"></v-checkbox>

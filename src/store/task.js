@@ -30,9 +30,10 @@ const task = {
       },
       examples(state){
         for (let i = 1; i <= state.nExamplesLoaded; i++) {
+          let selected = i%2 != 0;
           let title = `Tarea num. ${i}.`;
           let description = "Descripcion de mi tarea";          
-          state.items.push(new Task(title,description,true));
+          state.items.push(new Task(title,description,selected));
           }
       }
     }

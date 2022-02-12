@@ -32,7 +32,7 @@
             </v-row>
           </v-subheader>
 
-          <v-list-item-group v-model="selectedItems" multiple active-class="">
+          <v-list-item-group v-model="dataList" multiple active-class="">
             <div v-for="(item, index) in items" :key="item.title + index">
               <item
                 @deleteItem="deleteItem"
@@ -122,6 +122,17 @@ export default {
     ...mapState("task", {
       items: (state) => state.items,
     }),
+    dataList(){
+      let data = [];
+
+      this.items.forEach((item,pos) => {
+        if(item.selected){
+          data.push(pos);
+        }
+      });
+
+      return data;
+    }
   },
 };
 </script>
