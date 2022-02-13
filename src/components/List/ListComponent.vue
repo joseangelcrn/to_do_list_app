@@ -68,7 +68,7 @@
 import DialogCreateTask from "../Dialogs/DialogCreateTask";
 import DialogDeleteTask from "../Dialogs/DialogDeleteTask";
 import ListItemComponent from "./ListItemComponent";
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import DialogEditTask from "../Dialogs/DialogEditTask";
 
 export default {
@@ -122,17 +122,9 @@ export default {
     ...mapState("task", {
       items: (state) => state.items,
     }),
-    dataList(){
-      let data = [];
-
-      this.items.forEach((item,pos) => {
-        if(item.selected){
-          data.push(pos);
-        }
-      });
-
-      return data;
-    }
+    ...mapGetters({
+      dataList: 'task/getDataList'
+    })
   },
 };
 </script>

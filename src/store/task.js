@@ -36,6 +36,19 @@ const task = {
           state.items.push(new Task(title,description,selected));
           }
       }
+    },
+    getters:{
+      getDataList(state){
+        let data = [];
+
+        state.items.forEach((item,pos) => {
+          if(item.selected){
+            data.push(pos);
+          }
+        });
+  
+        return data;
+      }
     }
   }
 
