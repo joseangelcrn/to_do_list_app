@@ -51,6 +51,7 @@
 import Task from "../../store/Classes/Task";
 
 export default {
+  name:'CreateTask',
   data: () => ({
     item: new Task(),
     alert:{

@@ -65,11 +65,11 @@
 </template>
 
 <script>
-import DialogCreateTask from "../Dialogs/DialogCreateTask";
-import DialogDeleteTask from "../Dialogs/DialogDeleteTask";
+import DialogCreateTask from "../Dialogs/CreateTask";
+import DialogDeleteTask from "../Dialogs/DeleteTask";
 import ListItemComponent from "./ListItemComponent";
 import { mapGetters, mapState } from "vuex";
-import DialogEditTask from "../Dialogs/DialogEditTask";
+import DialogEditTask from "../Dialogs/EditTask";
 
 export default {
   data() {
